@@ -50,6 +50,35 @@ This will start the `customer_mcp` server and make it accessible at:
 http://127.0.0.1:8000/customer-mcp-server/mcp
 ```
 
+## Running with Docker Compose
+
+You can use Docker Compose to run all MCP servers simultaneously. Each server will be exposed on a different port.
+
+### Steps to Run
+
+1. Build and start all services:
+   ```zsh
+   docker-compose up --build
+   ```
+
+2. Access the MCP servers at the following URLs:
+
+   - `hello-mcp`: [http://127.0.0.1:8000/hello-server/mcp](http://127.0.0.1:8000/hello-server/mcp)
+   - `customer-mcp`: [http://127.0.0.1:8001/customer-mcp-server/mcp](http://127.0.0.1:8001/customer-mcp-server/mcp)
+   - `interview-mcp`: [http://127.0.0.1:8002/interview-mcp-server/mcp](http://127.0.0.1:8002/interview-mcp-server/mcp)
+   - `go-live-mcp`: [http://127.0.0.1:8003/go-live-mcp-server/mcp](http://127.0.0.1:8003/go-live-mcp-server/mcp)
+   - `testing-e2e-mcp`: [http://127.0.0.1:8004/testing-e2e-mcp-server/mcp](http://127.0.0.1:8004/testing-e2e-mcp-server/mcp)
+
+3. Stop all services:
+   ```zsh
+   docker-compose down
+   ```
+
+### Notes
+
+- Ensure Docker and Docker Compose are installed on your system.
+- Each MCP server runs in its own container and is accessible on its respective port.
+
 ## Configuring MCP Servers in VSCode
 
 To configure MCP servers in VSCode, you can add entries to your `settings.json` file under the `mcp.servers` section. This allows you to define and manage MCP server endpoints for easy access.

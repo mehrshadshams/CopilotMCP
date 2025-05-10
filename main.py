@@ -1,4 +1,5 @@
 import argparse
+import os
 import uvicorn
 
 from fastmcp import FastMCP
@@ -15,7 +16,13 @@ mcps = [
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Run a specific MCP server.")
-parser.add_argument("--mcp", type=str, required=True, help="The MCP server to run (e.g., 'hello', 'customer_mcp').")
+parser.add_argument(
+    "--mcp",
+    type=str,
+    default=os.getenv("MCP"),
+    required=os.getenv("MCP") is None,
+    help="The MCP server to run (e.g., 'hello', 'customer_mcp')."
+)
 args = parser.parse_args()
 
 # Validate the provided MCP server
@@ -27,6 +34,8 @@ module = __import__(args.mcp, fromlist=[''])
 mcp_instance = getattr(module, 'mcp', None)
 if not mcp_instance:
     raise ValueError(f"MCP instance not found in module: {args.mcp}")
+
+print(f"Running MCP server: {args.mcp}")
 
 # Create the ASGI app for the specified MCP instance
 mcp_app = mcp_instance.streamable_http_app(path='/mcp')

@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  hello-mcp:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MCP=hello
+    command: ["uv", "run", "main.py", "--mcp", "${MCP}"]
+
+  customer-mcp:
+    build: .
+    ports:
+      - "8001:8000"
+    environment:
+      - MCP=customer_mcp
+    command: ["uv", "run", "main.py", "--mcp", "${MCP}"]
+
+  interview-mcp:
+    build: .
+    ports:
+      - "8002:8000"
+    environment:
+      - MCP=interview_mcp
+    command: ["uv", "run", "main.py", "--mcp", "${MCP}"]
+
+  go-live-mcp:
+    build: .
+    ports:
+      - "8003:8000"
+    environment:
+      - MCP=go_live_mcp
+    command: ["uv", "run", "main.py", "--mcp", "${MCP}"]
+
+  testing-e2e-mcp:
+    build: .
+    ports:
+      - "8004:8000"
+    environment:
+      - MCP=testing_e2e_mcp
+    command: ["uv", "run", "main.py", "--mcp", "${MCP}"]
